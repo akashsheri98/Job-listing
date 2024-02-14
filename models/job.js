@@ -17,6 +17,10 @@ const jobSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    refUserId :{
+        type: mongoose.Types.ObjectId,  // reference to the user who posted this job
+        required:true,
+    }
 });
 
 module.exports = mongoose.model("Job",jobSchema);
