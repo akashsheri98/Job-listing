@@ -78,8 +78,17 @@ router.get("/all",  async (req, res) => {
   try {
     
     const title = req.query.title || "";
+    const skills = req.query.skills;
+    let filterSkills = skills?.split( "," ); 
+    let filter ={};
+
+    if( filterSkills){
+      filter = {skills : { $in :[...filterSkills] }}
+    }
     const jobList = await Job.find(
-      {title : {$regex: title , $options:"i"}}, 
+      {title : {$regex: title , $options:"i"}, 
+       ...filter,
+      },
       {companyName :1,});
 
     res.json({ data : jobList});
@@ -93,10 +102,10 @@ router.get("/all",  async (req, res) => {
 router.delete("/job/:jobId",  async (req, res) => {
   try {
     
-    const title = req.query.title || "";
-    const jobList = await Job.deleteByID(jobId);
+    const jobId = req.params.jobId;
+    const jobList = await Job.findByIdAndDelete(jobId);
 
-    res.json({ data : jobList});
+    res.json({ data : jobList}) ;
   } catch (error) 
   {
     console.log(`Error : ${error}`);
