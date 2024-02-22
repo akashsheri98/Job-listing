@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const User = require("./models/user");
 const authRoutes = require("./routes/auth");
 const jobRoutes = require("./routes/job");
@@ -9,6 +10,7 @@ const jobRoutes = require("./routes/job");
 const app = express();
 
 app.use(express.json());
+app.use(cors()); //for testing purposes only, should be removed in production
 
 //connect to db
 mongoose
