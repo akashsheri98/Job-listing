@@ -64,7 +64,7 @@ router.get("/job-description/:jobId",  async (req, res) => {
       return res.status(400).json({ errorMessage: "Bad Request" });
     }
 
-    const jobDetails = await Job.findById(jobId , {companyName:1,title:1,});
+    const jobDetails = await Job.findById(jobId);
 
     res.json({ data : jobDetails});
   } catch (error) 
