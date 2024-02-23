@@ -28,7 +28,7 @@ router.post("/create", jwtVerify, async (req, res) => {
   }
 });
 
-router.post("/edit/:jobId", jwtVerify, async (req, res) => {
+router.put("/edit/:jobId", jwtVerify, async (req, res) => {
   try {
     const { companyName, title, description, logoUrl } = req.body;
     const jobId = req.params.jobId;
